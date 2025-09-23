@@ -1,7 +1,7 @@
 
 // setting up requireds
 const http = require('http');
-const fileServer = require('./fileServer.js');
+//const fileServer = require('./fileServer.js');
 const url = require('url');
 
 let phoneBook = new Array();
