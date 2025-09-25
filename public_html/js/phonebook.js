@@ -36,3 +36,49 @@ function errorHandler(message) {
 	alert("Error: "+message);
 }
 
+function sendDisplayAllAJAX()
+{
+    let AJAXObj = new XMLHttpRequest();
+    AJAXObj.onload = function(){
+        if (this.status == 200)
+        {
+            let phoneBook = JSON.parse(this.responseText);
+            let htmlStr = "";
+            for (entry of phoneBook)
+            {
+                htmlStr = "<p>" + entry.name + ": " + entry.phone + "</p>";
+            }
+            resultsPar.innerHTML = htmlStr;
+        }
+        else
+        {
+            errorHandler(this.status);
+        }
+    };
+    AJAXObj.onerror = function() {
+        errorHandler("Request failed");
+    }
+    AJAXObj.open("GET", "/displayall", true);
+    AJAXObj.send();
+}
+
+function sendSearchAJAX(searchName)
+{
+    let AJAXObj = new XMLHttpRequest();
+    AJAXObj.onload = function(){
+        if (this.status == 200)
+        {
+            let result = JSON.parse(this.responseText);
+            resultsPar.innerHTML = "<p>" + result.phone + "</p>"; 
+        }
+        else
+        {
+            errorHandler(this.status);
+        }
+    };
+    AJAXObj.onerror = function() {
+        errorHandler("Request failed");
+    }
+    AJAXObj.open("GET", "/search?name=" + searchName, true);
+    AJAXObj.send();
+}

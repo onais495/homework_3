@@ -38,6 +38,12 @@ const myserver = http.createServer(function(req,res){
 	}
 });
 
+function displayall(res)
+{
+	res.writeHead(200, { "Content-Type" : "application/json"})
+	res.write(JSON.stringify(phoneBook));
+	res.end();
+}
 // start the server
 myserver.listen(80);
 
